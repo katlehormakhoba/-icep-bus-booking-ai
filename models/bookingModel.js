@@ -5,15 +5,16 @@ const bookingSkema = new mongoose.Schema({
     bus: {
         type: mongoose.Schema.ObjectId,
         ref: 'Bus',
-        required: [true, 'Cart must belong to a user.']
+        required: [true, 'Booking must belong to a bus.']
     },
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
-        required: [true, 'Cart must belong to a user.']
+        required: [true, 'Booking must belong to a user.']
     },
     bookingDate: {
-        type: Date
+        type: Date,
+        default: new Date()
     },
     createdAt: {
         type: Date,

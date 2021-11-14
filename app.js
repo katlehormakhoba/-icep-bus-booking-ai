@@ -21,6 +21,10 @@ const addressRoutes = require('./routes/addressRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const wishlistRoutes = require('./routes/wishlistRoutes');
 const historyRoutes = require('./routes/historyRoutes');
+const busRoutes = require('./routes/busRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
+
+
 //MIDDLEWARE 
 app.use(express.json()); // FOR BEING ABLE TO USE REQ AND MORE or you can use bodyparser
 //app.use(morgan('dev')) //DISPLAYS ROUTE ACCESSED WITH RESPONSE TIME
@@ -68,6 +72,8 @@ app.use('/api/v1/address', addressRoutes);
 app.use('/api/v1/payment', paymentRoutes);
 app.use('/api/v1/wishlist', wishlistRoutes);
 app.use('/api/v1/history', historyRoutes);
+app.use('/api/v1/bus', busRoutes);
+app.use('/api/v1/booking', bookingRoutes);
 
 app.all('*', (req, res, next) => {
 
