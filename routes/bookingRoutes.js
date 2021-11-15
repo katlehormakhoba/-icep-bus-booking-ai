@@ -17,13 +17,18 @@ router.use('/:productId/reviews', reviewRoutes);
 // router.route('/product-stats')
 //     .get(authController.protect, authController.restrictTo('admin'), productController.getProductStats);
 
+
+
+router.route('/myBookings').get(authController.protect, bookingController.setBusUserIds, bookingController.getMyBookings)
 router.route('/').get(bookingController.getAllBookings)
-    .post(bookingController.createBooking);
+    .post(authController.protect, bookingController.createBooking);
 
 router.route('/:id')
-    .get(bookingController.getBooking)
+    .get(authController.protect, bookingController.getBooking)
     .patch(authController.protect, bookingController.updateBooking)
     .delete(authController.protect, bookingController.deleteBooking)
+    .post(authController.protect, bookingController.setBusUserIds, bookingController.createBooking)
+
 
 
 

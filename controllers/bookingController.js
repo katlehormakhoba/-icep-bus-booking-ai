@@ -26,6 +26,7 @@ exports.setBusUserIds = (req, res, next) => {
 }
 
 exports.getAllBookings = factoryHandler.getAll(Booking);
+exports.getMyBookings = factoryHandler.getAll(Booking);
 exports.getBooking = factoryHandler.getOne(Booking)
 exports.createBooking = factoryHandler.createOne(Booking);
 exports.updateBooking = factoryHandler.updateOne(Booking);
