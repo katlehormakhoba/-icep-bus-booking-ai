@@ -1,9 +1,38 @@
 const Booking = require('../models/bookingModel');
+const Bus = require('../models/busModel');
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 const factoryHandler = require('./factoryHandler');
 
+//{createdAt:{$gte:ISODate("2021-01-01"),$lt:ISODate("2020-05-01"}}
+
+exports.checkBusLimit = catchAsync( async( req, res, next) => {
+
+    
+    const doc = await Bus.find({_id:req.params.id});
+
+    if(!doc){
+        return next(new AppError('No docment found with that ID', 404));
+    }
+
+    const results= doc.length
+    console.log("Bus",doc)
+    // res.status(200).json({
+    //     status: 'success',
+    //     data: doc
+    // })
+
+    const busBookings =  await Booking.find({bus:req.params.id})
+
+    console.log(Date() , doc[0].expDate )
+    if(busBookings.length == doc.seats || doc[0].expDate <= Date() ){
+        return next(new AppError('Sorry bus is full or has left', 400));
+    } 
+    console.log("Booking",busBookings)
+
+    next();
+})
 
 exports.setBusUserIds = (req, res, next) => {
 

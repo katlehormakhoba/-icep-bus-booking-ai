@@ -1,3 +1,4 @@
+const { decodeBase64 } = require('bcryptjs');
 const mongoose = require('mongoose');
 
 
@@ -13,15 +14,17 @@ const bookingSkema = new mongoose.Schema({
         required: [true, 'Booking must belong to a user.']
     },
     bookingDate: {
-        type: Date,
-        default: new Date()
+        type: String,
+        default: Date()
     },
     createdAt: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: Date()
     },
 
 })
+
+// bookingSkema.index({ bus: 1, user: 1 }, { unique: true });
 
 bookingSkema.pre(/^find/, function(next) {
 
