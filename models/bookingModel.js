@@ -30,7 +30,7 @@ bookingSkema.pre(/^find/, function(next) {
 
     this.populate({
         path: 'bus',
-        select: 'name destination'
+        select: 'name from to'
     })
 
     next();

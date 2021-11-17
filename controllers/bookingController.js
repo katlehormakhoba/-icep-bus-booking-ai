@@ -26,7 +26,9 @@ exports.checkBusLimit = catchAsync( async( req, res, next) => {
     const busBookings =  await Booking.find({bus:req.params.id})
 
     console.log(Date() , doc[0].expDate )
-    if(busBookings.length == doc.seats || doc[0].expDate <= Date() ){
+    if(busBookings.length == doc[0].seats || doc[0].expDate <= Date() ){
+        doc[0].isActive = false;
+        await doc[0].save({ validateBeforeSave: false });
         return next(new AppError('Sorry bus is full or has left', 400));
     } 
     console.log("Booking",busBookings)

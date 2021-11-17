@@ -24,7 +24,7 @@ router.route('/').get(bookingController.getAllBookings)
     .post(authController.protect, bookingController.createBooking);
 
 router.route('/:id')
-    .get(authController.protect, bookingController.getBooking)
+    .get(bookingController.getBooking)
     .patch(authController.protect, bookingController.updateBooking)
     .delete(authController.protect, bookingController.deleteBooking)
     .post(authController.protect, bookingController.setBusUserIds, bookingController.checkBusLimit, bookingController.createBooking)
