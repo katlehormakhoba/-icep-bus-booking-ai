@@ -18,7 +18,7 @@ router.use('/:productId/reviews', reviewRoutes);
 //     .get(authController.protect, authController.restrictTo('admin'), productController.getProductStats);
 
 router.route('/').get(busController.getAllBusses)
-    .post(busController.createBus);
+    .post(busController.checkActiveBus, busController.createBus);
 
 router.route('/:id')
     .get(busController.getBus)
