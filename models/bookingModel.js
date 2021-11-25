@@ -18,8 +18,8 @@ const bookingSkema = new mongoose.Schema({
         default: Date()
     },
     createdAt: {
-        type: String,
-        default: Date()
+        type: Date,
+        default: new Date()
     },
 
 })
@@ -36,6 +36,16 @@ bookingSkema.pre(/^find/, function(next) {
     next();
 })
 
+bookingSkema.pre(/^find/, function(next) {
+    let t = new Date(Date());
+    t.setHours(t.getHours() -6);
+    // t.setMinutes(t.getMinutes() -8);
+    
+
+    this.find({createdAt: {$gte: t}});
+
+    next();
+})
 
 const Booking = mongoose.model('Booking', bookingSkema);
 

@@ -26,7 +26,7 @@ exports.checkBusLimit = catchAsync( async( req, res, next) => {
     const busBookings =  await Booking.find({bus:req.params.id})
 
     console.log(Date() , doc[0].expDate )
-    if(busBookings.length == doc[0].seats || doc[0].expDate <= Date() ){
+    if(busBookings.length == doc[0].seats || doc[0].expDate <= Date() || doc[0].isActive == false){
         doc[0].isActive = false;
         await doc[0].save({ validateBeforeSave: false });
         return next(new AppError('Sorry bus is full or has left', 400));
@@ -55,6 +55,25 @@ exports.setBusUserIds = (req, res, next) => {
 
     next();
 }
+
+const getBus = catchAsync( async( req, res, next) => {
+
+    
+    const bus = await Bus.find({isActive:true});
+
+    if(!bus){
+        return next(new AppError('Sorry bus was not found', 404));
+    }
+
+    const results= bus.length
+    console.log("Bus",bus)
+    res.status(200).json({
+        status: 'success',
+        data: bus
+    })
+
+    
+})
 
 exports.getAllBookings = factoryHandler.getAll(Booking);
 exports.getMyBookings = factoryHandler.getAll(Booking);

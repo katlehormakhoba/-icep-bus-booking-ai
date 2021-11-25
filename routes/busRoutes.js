@@ -16,14 +16,17 @@ router.use('/:productId/reviews', reviewRoutes);
 
 // router.route('/product-stats')
 //     .get(authController.protect, authController.restrictTo('admin'), productController.getProductStats);
+router.route('/inactive')
+    .get(busController.getInactiveBusses);
 
-router.route('/').get(busController.getAllBusses)
+router.route('/')
+    .get(busController.getActiveBusses)
     .post(busController.checkActiveBus, busController.createBus);
 
 router.route('/:id')
     .get(busController.getBus)
     .patch(authController.protect, authController.restrictTo('admin'), busController.updateBus)
-    .delete(authController.protect, authController.restrictTo('admin'), busController.deleteBus)
+    .delete(authController.protect, authController.restrictTo('admin'), busController.deleteBus);
 
 
 
