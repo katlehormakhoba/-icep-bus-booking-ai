@@ -1,11 +1,8 @@
 const router = require('express').Router();
 const bookingController = require('../controllers/bookingController');
-const reviewRoutes = require('./reviewRoutes');
-const cartRoutes = require('./cartRoutes');
 const authController = require('../controllers/authController');
 
 //MIDDLEWARE 
-router.use('/:productId/reviews', reviewRoutes);
 
 
 // router.param('id', (req, res, next, val) => {

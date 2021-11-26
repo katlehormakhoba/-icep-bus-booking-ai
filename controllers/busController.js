@@ -32,7 +32,7 @@ exports.checkActiveBus = catchAsync( async( req, res, next) => {
     
     const doc = await Bus.find({isActive:true});
 
-    console.log(doc)
+    // console.log(doc)
 
     if(doc.length > 0){
         return next(new AppError('Sorry There is Active Bus Available', 404));
@@ -41,11 +41,11 @@ exports.checkActiveBus = catchAsync( async( req, res, next) => {
 
     next();
 })
-// setInterval(function(){ 
+setInterval(function(){ 
 
-//     checkBusExp();
-//     console.log("hi")
-// },1* 60000)
+    checkBusExp();
+    console.log("hi")
+},5* 60000)
 
 const getBus = (filter) => catchAsync( async( req, res, next) => {
 
@@ -55,12 +55,13 @@ const getBus = (filter) => catchAsync( async( req, res, next) => {
 
     console.log(bus)
     if(bus.length < 1){
-        return next(new AppError('Sorry bus as not found', 404));
+        return next(new AppError('Sorry bus is currently not available', 404));
     }
 
-    const bookings = await Booking.find({bus:bus._id});
+    const bookings = await Booking.find({bus:bus[0]._id});
 
     const availableSeats = bus[0].seats - bookings.length
+    console.log(bookings.length)
 
     const results= bus.length
     // console.log("Bus",bus)

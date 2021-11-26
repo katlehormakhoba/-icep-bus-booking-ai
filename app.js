@@ -13,14 +13,7 @@ const app = express();
 //ROUTES DECLARATION
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController')
-const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const reviewRoutes = require('./routes/reviewRoutes');
-const addressRoutes = require('./routes/addressRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
-const wishlistRoutes = require('./routes/wishlistRoutes');
-const historyRoutes = require('./routes/historyRoutes');
 const busRoutes = require('./routes/busRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 
@@ -64,14 +57,8 @@ app.use('/api', limiter);
 
 
 //APP.USE ROUTES DECLARATION MIDDLEWARE
-app.use('/api/v1/carts', cartRoutes);
-app.use('/api/v1/reviews', reviewRoutes);
-app.use('/api/v1/products', productRoutes);
+
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/address', addressRoutes);
-app.use('/api/v1/payment', paymentRoutes);
-app.use('/api/v1/wishlist', wishlistRoutes);
-app.use('/api/v1/history', historyRoutes);
 app.use('/api/v1/bus', busRoutes);
 app.use('/api/v1/booking', bookingRoutes);
 

@@ -43,7 +43,7 @@ const busSkema = new mongoose.Schema({
     },
     expDate : {
         type: String,
-        default: new Date(Date.now() + 5* 60000).toString()
+        default: new Date(Date.now() + 30* 60000).toString()
     }
 })
 
